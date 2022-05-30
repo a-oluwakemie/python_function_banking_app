@@ -1,6 +1,8 @@
 import random
 import time
 
+
+
 def account_number_generator(n):
     acct_num=""
     for i in range(n):
@@ -17,17 +19,27 @@ def transaction_pin_generator(n):
     return pin.zfill(4)
 print(transaction_pin_generator(3))
 
-
+ 
+balance = 0
 
 def check_balance():
-    pass
+    print('Your current balance', balance)
 
+print(check_balance())
 
 def deposit(amt):
-    pass
+    balance = balance + amt
+    return balance
+
 
 def withdraw(amount):
-    pass
+    amount= input("amount you want to withdraw:>>")
+    if amount > balance:
+        print("INSUFFICIENT FUNDS")
+    else:
+        balance-= amount
+        return balance
+
 
 
 
@@ -63,8 +75,25 @@ while True:
             print(f"""\nWelcome {firstname} {last_name} your account balance is:{account_balance} \n
                 To make deposit into your account press: 4
                 To make withdrawals from your account press: 5
+                To check account balance from your account press: 6
                 To log out press :6\n
                   """)
+            trans_input= input("enter transaction type:>>>")
+            if trans_input == 4:
+                money = int(input("enter amount to deposit:>>"))
+                deposit(money)
+            elif trans_input ==5:
+                money = int(input("enter amount to withdraw:>>"))
+                withdraw(money)
+            elif trans_input ==6:
+                check_balance()
+            elif trans_input ==7:
+                print("Loging you out......")
+                time.sleep(3)
+                print("You have successfully logged out.")
+                break
+            else:
+                print("input does not exists")
             # user_log:
         else:
             print("Login pin does not exist")
